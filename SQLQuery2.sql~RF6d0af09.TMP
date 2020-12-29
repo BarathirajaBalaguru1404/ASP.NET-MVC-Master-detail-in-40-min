@@ -1,0 +1,56 @@
+create database db_school
+
+use db_school
+
+create table tbl_std(Role_no int identity(1,1) primary key,
+Std_name varchar(40),
+Std_class varchar(40),
+Std_sec varchar(40))
+
+drop table tbl_mark
+
+create table tbl_mark(Id int identity(1,1) primary key ,
+Mark1 int,
+Mark2 int,
+Mark3 int,
+Mark4 int,
+Mark5 int,
+tot int,
+Std_id int)
+
+delete from tbl_mark
+select * from tbl_std
+
+select * from tbl_mark
+
+select * from tbl_mark 
+
+SELECT * FROM tbl_mark WHERE tot=(select max(tot) from tbl_mark)
+
+SELECT * FROM tbl_mark t
+join tbl_std s on (s.Role_no=t.Std_id)
+ ORDER BY tot desc
+
+
+ SELECT * FROM tbl_mark t
+join tbl_std s on (s.Role_no=t.Std_id)
+ ORDER BY tot desc
+
+  SELECT mark1,mark2,mark3,mark4,mark5,tot,  DENSE_RANK() OVER
+    ( ORDER BY tot DESC) AS Rank FROM tbl_mark t
+join tbl_std s on (s.Role_no=t.Std_id)
+ ORDER BY tot desc
+ 
+
+ select mark1,mark2,mark3,mark4,mark5,tot,
+  RANK() OVER (ORDER BY tot DESC) AS DenseRank from tbl_mark  t join 
+  tbl_std s   on (s.Role_no=t.Std_id)  ORDER BY tot desc
+
+ select * from tbl_mark
+select * from tbl_std
+
+SELECT tot, 
+RANK () OVER (
+ORDER BY tot
+) AS Rank_no 
+FROM tbl_mark;
